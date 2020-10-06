@@ -46,6 +46,31 @@ public class Main {
         return false;
     }
 
+    /**
+     * Return l'index d'un nombre chercher ou Return -1 si le nombre n'est pas dans le tableau
+     * @param sortedNumber un tableau d'int deja trier par ordre croissant
+     * @param toFind Int à chercher
+     * @return L'index du nombre a chercher ou -1 si il y est pas
+     */
+    public static int returnIndexOfInt(int[] sortedNumber, int toFind) {
+        int max = sortedNumber.length;
+        int min = 0;
+        int i = 0;
+        while (min <= max) { // <= permet de vérifier l'index 0
+            i = min + ((max - min) / 2); // i c'est le millieu du tableau
+            System.out.println("Min = " + min + " | " + "Max = " + max + " | " + "I = " + i);
+            if (toFind == sortedNumber[i]) {
+                return i; // Index du nombre chercher
+            } else if (toFind < sortedNumber[i]) {
+                max = i - 1; // On fait -1 pour vérifier un nouvel valeur car i est deja vérifier et réduire les bornes
+            } else {
+                min = i + 1; // On fait +1 pour réduire les bornes
+            }
+        }
+        return -1; // N'est pas dans le tableau
+    }
+
+
     public static void main(String[] args) {
 
         int[] scores = new int[7];
@@ -57,6 +82,8 @@ public class Main {
         scores[5] = 6;
         scores[6] = 10;
 
+        int[] sortedNumber = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
         int moyenne = 0;
         for (int x = 0; x < scores.length; x++) {
             //System.out.println(scores[x]);
@@ -64,6 +91,7 @@ public class Main {
         }
         //System.out.println("Moyenne : " + (moyenne / scores.length));
 
-        System.out.println(returnTrueIfNumberInf10(scores));
+        //System.out.println(returnTrueIfNumberInf10(scores));
+        System.out.println(returnIndexOfInt(sortedNumber, 1));
     }
 }
